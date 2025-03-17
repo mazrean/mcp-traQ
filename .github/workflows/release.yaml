@@ -39,8 +39,19 @@ jobs:
       - name: Install dependencies
         run: deno install
       - name: Build
-        run: deno compile --allow-net --allow-env -o dist/mcp-traQ --target ${{ matrix.target }} main.ts
+        run: deno compile --allow-net --allow-env -o dist/mcp-traQ-${{ matrix.target }} --target ${{ matrix.target }} main.ts
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/mcp-traQ
+          files: dist/mcp-traQ-${{ matrix.target }}
+  license:
+    name: License
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            LICENSE
+            README.md
