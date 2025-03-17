@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  TAG_NAME: ${{ github.event.ref }}
+
+jobs:
+  single_executable:
+    name: Release single executable
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        target:
+          [
+            "deno-linux-x64",
+            "deno-linux-arm64",
+            "deno-darwin-x64",
+            "deno-darwin-arm64",
+            "deno-windows-x64",
+          ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: cache deno installation and deno.land dependencies
+        uses: actions/cache@v2
+        with:
+          key: deno-${{ hashFiles('deno.lock') }}
+          restore-keys: deno-
+          path: |
+            /home/runner/.deno
+            /home/runner/.cache/deno/deps/https/deno.land
+      - name: Install dependencies
+        run: deno install
+      - name: Build
+        run: deno compile --allow-net --allow-env -o dist/mcp-traQ --target ${{ matrix.target }} main.ts
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/mcp-traQ

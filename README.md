@@ -3,6 +3,9 @@
 traQをデータソースとした、MCPプロトコルサーバーの実装です。
 LLMからメッセージやチャンネル、ユーザーの情報を取得し、利用できるようになります。
 
+## インストール
+[Releases](https://github.com/mazrean/mcp-traQ/releases)からOS/CPUアーキテクチャに合わせたバイナリをダウンロードし、実行権限を付与した上でPATHの通ったディレクトリに配置してください。
+
 ## 使用方法
 1. traQのBotを作成する
   - traPメンバーは[Bot Console](https://bot-console.trap.jp/)からBotを作成できます

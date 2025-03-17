@@ -6,6 +6,9 @@
   "imports": {
     "@modelcontextprotocol/sdk": "npm:@modelcontextprotocol/sdk@^1.7.0",
     "@std/assert": "jsr:@std/assert@1",
-    "@std/expect": "jsr:@std/expect@1"
+    "@std/expect": "jsr:@std/expect@1",
+    "@traptitech/traq": "npm:@traptitech/traq@^3.22.0-4",
+    "commander": "npm:commander@13",
+    "zod": "npm:zod@3"
   }
 }
