@@ -8,6 +8,7 @@
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@modelcontextprotocol/sdk@*": "1.7.0_express@5.0.1_zod@3.24.2",
     "npm:@modelcontextprotocol/sdk@^1.7.0": "1.7.0_express@5.0.1_zod@3.24.2",
+    "npm:commander@*": "13.1.0",
     "npm:zod@*": "3.24.2"
   },
   "jsr": {
@@ -86,6 +87,9 @@
         "call-bind-apply-helpers",
         "get-intrinsic"
       ]
+    },
+    "commander@13.1.0": {
+      "integrity": "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw=="
     },
     "content-disposition@1.0.0": {
       "integrity": "sha512-Au9nRL8VNUut/XSzbQA38+M78dzP4D+eqg3gfJHMIHHYa3bg067xj1KxMUWj+VULbiZMowKngFFbKczUrNJ1mg==",
