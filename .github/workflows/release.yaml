@@ -17,13 +17,11 @@ jobs:
     strategy:
       matrix:
         target:
-          [
-            "deno-linux-x64",
-            "deno-linux-arm64",
-            "deno-darwin-x64",
-            "deno-darwin-arm64",
-            "deno-windows-x64",
-          ]
+          - x86_64-unknown-linux-gnu
+          - aarch64-unknown-linux-gnu
+          - x86_64-pc-windows-msvc
+          - x86_64-apple-darwin
+          - aarch64-apple-darwin
     steps:
       - uses: actions/checkout@v4
       - name: Set up Deno
