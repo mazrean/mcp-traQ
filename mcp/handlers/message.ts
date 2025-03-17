@@ -4,7 +4,10 @@ import { CallToolResult } from "npm:@modelcontextprotocol/sdk";
 import { searchMessages, Client } from "../../traq/client.ts";
 
 const mcpSchema = {
-  channelId: z.string().describe("The channel ID to search messages from"),
+  channelId: z
+    .string()
+    .optional()
+    .describe("The channel ID to search messages from(optional)"),
   limit: z
     .number()
     .gte(1)
@@ -16,14 +19,54 @@ const mcpSchema = {
     .gte(0)
     .default(0)
     .describe("The offset to start searching from"),
+  after: z
+    .string()
+    .optional()
+    .describe("Search messages after this date (ISO string)"),
+  before: z
+    .string()
+    .optional()
+    .describe("Search messages before this date (ISO string)"),
+  words: z.string().optional().describe("Search query string"),
+  to: z
+    .array(z.string())
+    .optional()
+    .describe("Array of user IDs to filter messages sent to"),
+  from: z
+    .array(z.string())
+    .optional()
+    .describe("Array of user IDs to filter messages from"),
+  sort: z
+    .enum(["createdAt", "-createdAt", "updatedAt", "-updatedAt"])
+    .optional()
+    .describe(
+      "Sort order for messages(crearedAt: ascending, -createdAt: descending, updatedAt: ascending, -updatedAt: descending)"
+    ),
+  includeBot: z
+    .boolean()
+    .optional()
+    .default(false)
+    .describe("Include bot messages"),
 };
 const schema = z.object(mcpSchema);
 type Schema = z.infer<typeof schema>;
 
 export const createHandler = (client: Client) => {
-  return async ({ channelId, limit, offset }: Schema) => {
+  return async (params: Schema) => {
     try {
-      const messages = await searchMessages(client, channelId, limit, offset);
+      const messages = await searchMessages(
+        client,
+        params.limit,
+        params.after ? new Date(params.after) : undefined,
+        params.before ? new Date(params.before) : undefined,
+        params.words,
+        params.channelId,
+        params.to,
+        params.from,
+        params.offset,
+        params.sort,
+        params.includeBot
+      );
 
       return {
         content: [

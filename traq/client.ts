@@ -53,16 +53,40 @@ export const createBotClient = (token: string) => {
 // Message related functions
 export const searchMessages = async (
   client: Apis,
-  channelId: string,
   limit: number,
-  offset?: number
+  after?: Date,
+  before?: Date,
+  words?: string,
+  channelId?: string,
+  to?: string[],
+  from?: string[],
+  offset?: number,
+  sort?: "createdAt" | "-createdAt" | "updatedAt" | "-updatedAt" | undefined,
+  includeBot?: boolean
 ): Promise<Messages[]> => {
-  const response = await client.getMessages(channelId, limit, offset);
+  const response = await client.searchMessages(
+    words,
+    after?.toISOString(),
+    before?.toISOString(),
+    channelId,
+    to,
+    from,
+    undefined,
+    includeBot,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    limit,
+    offset,
+    sort
+  );
   if (response.status !== 200) {
     throw new Error(`Failed to get messages: ${response.statusText}`);
   }
 
-  return response.data.map((message) => {
+  return response.data.hits.map((message) => {
     return {
       userId: message.userId,
       channelId: message.channelId,
