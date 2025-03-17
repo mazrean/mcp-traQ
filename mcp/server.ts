@@ -1,7 +1,6 @@
 import { McpServer } from "npm:@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "npm:@modelcontextprotocol/sdk/server/stdio.js";
 
-import { setup as setupGetStringLengthTool } from "./handlers/getStringLengthTool.ts";
 import { setup as setupMessage } from "./handlers/message.ts";
 import { setup as setupChannel } from "./handlers/channel.ts";
 import { setup as setupUser } from "./handlers/user.ts";
@@ -16,7 +15,6 @@ const server = new McpServer({
 
 export const run = async (client: Client) => {
   try {
-    setupGetStringLengthTool(server);
     setupMessage(server, client);
     setupChannel(server, client);
     setupUser(server, client);
