@@ -8,7 +8,7 @@
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@modelcontextprotocol/sdk@*": "1.7.0_express@5.0.1_zod@3.24.2",
     "npm:@modelcontextprotocol/sdk@^1.7.0": "1.7.0_express@5.0.1_zod@3.24.2",
-    "npm:@types/node@*": "22.12.0"
+    "npm:zod@*": "3.24.2"
   },
   "jsr": {
     "@std/assert@1.0.11": {
