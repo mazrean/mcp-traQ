@@ -42,10 +42,10 @@ type Pin = {
 export type Client = Apis;
 
 // Client creation
-export const createBotClient = (token: string) => {
+export const createBotClient = (token: string, basePath: string) => {
   const config = new Configuration({
     accessToken: token,
-    basePath: "https://q.trap.jp/api/v3",
+    basePath: basePath,
   });
   return new Apis(config);
 };
